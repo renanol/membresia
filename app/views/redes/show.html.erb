@@ -1,0 +1,25 @@
+<form action="" class="form-horizontal">
+
+  <div class="form-group">
+    <%= label_tag :igreja, nil, class: 'col-md-1 control-label no-padding-right' %>
+    <div class="col-md-5">
+      <%= text_field_tag :igreja, @rede.igreja.descricao, class: 'form-control', disabled: 'disabled' %>
+    </div>
+
+    <%= label_tag :responsavel, 'Responsável', class: 'col-md-1 control-label no-padding-right' %>
+    <div class="col-md-5">
+      <%= text_field_tag :responsavel, @rede.responsavel.pessoa.nome, class: 'form-control', disabled: 'disabled' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag :descricao, 'Descrição', class: 'col-md-1 control-label no-padding-right' %>
+    <div class="col-md-11">
+      <%= text_field_tag :descricao, @rede.descricao, class: 'form-control', disabled: 'disabled' %>
+    </div>
+  </div>
+
+  <%= link_to 'Listar', redes_path, class: 'btn btn-blue' %>
+  <%= link_to 'Editar', edit_rede_path(@rede), class: 'btn btn-blue' %>
+
+</form>

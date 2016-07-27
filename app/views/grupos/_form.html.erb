@@ -1,0 +1,92 @@
+<%= form_for(@grupo, html: {class: 'form-horizontal', role: 'form'}) do |g| %>
+    <div class="form-group">
+      <%= g.label :descricao, class: 'col-md-1 control-label no-padding-right' %>
+      <div class="col-md-11">
+        <%= g.text_field :descricao, type: 'text', class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="form-title">
+      Permissões
+    </div>
+
+    <table class="table table-hover table-bordered">
+      <thead>
+      <tr>
+        <th align="left">Nome</th>
+        <th align="center">Nenhuma</th>
+        <th align="center">Visualizar</th>
+        <th align="center">Alterar</th>
+        <th align="center">Não</th>
+        <th align="center">Sim</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @grupo.grupo_permissaos.each do |gp| %>
+          <%= g.fields_for :grupo_permissaos, gp do |gp_fields| %>
+              <%= gp_fields.hidden_field :permissao_id %>
+              <tr>
+                <td><%= gp.permissao.descricao %></td>
+                <% if gp.permissao.acesso? %>
+                    <td align="center">
+                      <div class="radio">
+                        <label>
+                          <%= gp_fields.radio_button :valor, GrupoPermissao.valores[:nenhuma], class: 'colored-blue', checked: gp.nenhuma? %>
+                          <span class="text"></span>
+                        </label>
+                      </div>
+                    </td>
+                    <td align="center">
+                      <div class="radio">
+                        <label>
+                          <%= gp_fields.radio_button :valor, GrupoPermissao.valores[:visualizar], class: 'colored-blue', checked: gp.visualizar? %>
+                          <span class="text"></span>
+                        </label>
+                      </div>
+                    </td>
+                    <td align="center">
+                      <div class="radio">
+                        <label>
+                          <%= gp_fields.radio_button :valor, GrupoPermissao.valores[:alterar], class: 'colored-blue', checked: gp.alterar? %>
+                          <span class="text"></span>
+                        </label>
+                      </div>
+                    </td>
+                <% else %>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                <% end %>
+                <% if gp.permissao.sim_nao? %>
+                    <td align="center">
+                      <div class="radio">
+                        <label>
+                          <%= gp_fields.radio_button :valor, GrupoPermissao.valores[:nao], class: 'colored-blue', checked: gp.nao? %>
+                          <span class="text"></span>
+                        </label>
+                      </div>
+                    </td>
+                    <td align="center">
+                      <div class="radio">
+                        <label>
+                          <%= gp_fields.radio_button :valor, GrupoPermissao.valores[:sim], class: 'colored-blue', checked: gp.sim? %>
+                          <span class="text"></span>
+                        </label>
+                      </div>
+                    </td>
+                <% else %>
+                    <td></td>
+                    <td></td>
+                <% end %>
+              </tr>
+          <% end %>
+      <%end%>
+      </tbody>
+    </table>
+
+    <br>
+
+    <div class="form-group" align="center">
+      <button type="submit" class="btn btn-default">Confirmar</button>
+    </div>
+<% end %>

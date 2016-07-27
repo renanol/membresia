@@ -1,0 +1,47 @@
+<%= bootstrap_form_for(@sub_equipe,layout: :horizontal, label_col: 'col-sm-1', control_col: 'col-sm-11') do |f| %>
+
+    <%= hidden_field_tag :arquivo, 'new-edit-form' %>
+
+    <%= hidden_field_tag :id_responsavel, unless @sub_equipe.responsavel.nil? then @sub_equipe.responsavel.id else 0 end %>
+
+    <% unless @sub_equipe.equipe.nil? then %>
+        <%= hidden_field_tag :id_equipe, @sub_equipe.equipe.id %>
+        <%= hidden_field_tag :id_rede, @sub_equipe.equipe.rede.id %>
+        <%= hidden_field_tag :id_igreja, @sub_equipe.equipe.rede.igreja.id %>
+    <% else %>
+        <%= hidden_field_tag :id_equipe, 0 %>
+        <%= hidden_field_tag :id_rede, 0 %>
+        <%= hidden_field_tag :id_igreja, 0 %>
+    <% end %>
+
+    <div class="form-group">
+
+      <%= label_tag :igreja_id, nil, class: 'col-sm-1 control-label no-padding-right' %>
+      <div class="col-sm-5">
+        <%= select_tag :igreja_id, nil, {class: 'form-control'} %>
+      </div>
+
+      <div class="col-sm-6">
+        <%= f.select :responsavel_id, [], {label_col:'col-sm-2', control_col: 'col-sm-10', label_class: 'no-padding-right'} %>
+      </div>
+
+      <%= label_tag :rede_id, nil, class: 'col-sm-1 control-label no-padding-right' %>
+      <div class="col-sm-5">
+        <%= select_tag :rede_id, nil, {class: 'form-control'} %>
+      </div>
+
+      <div class="col-sm-6">
+        <%= f.select :equipe_id, [], {label_col:'col-sm-2', control_col: 'col-sm-10', label_class: 'no-padding-right'} %>
+      </div>
+
+      <div class="col-sm-12">
+        <%= f.text_field :descricao, label: 'Descrição', placeholder: 'Descrição', label_class: 'no-padding-right' %>
+      </div>
+
+    </div>
+
+    <%= link_to 'Listar', sub_equipes_path, class: 'btn btn-blue' %>
+
+    <%= f.submit class: 'btn btn-blue' %>
+
+<% end %>

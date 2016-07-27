@@ -1,0 +1,213 @@
+<!-- Page Sidebar -->
+<div class="page-sidebar" id="sidebar">
+  <ul class="nav sidebar-menu">
+    <!--Dashboard-->
+    <li>
+      <%= link_to root_path do %>
+          <%= fa_icon 'tachometer', class: 'menu-icon' %>
+          <span class="menu-text"> Dashboard </span>
+      <% end %>
+    </li>
+
+    <!--Igreja-->
+    <li>
+      <%= link_to '#', class: 'menu-dropdown' do %>
+          <%= fa_icon 'home', class: 'menu-icon' %>
+          <span class="menu-text"> Igreja </span>
+          <i class="menu-expand"></i>
+
+      <% end %>
+
+      <ul class="submenu">
+
+        <li>
+          <%= link_to igrejas_path, class: 'open-menu' do %>
+              <%= fa_icon 'navicon', class: 'menu-icon' %>
+              <span class="menu-text"> Listar </span>
+          <% end %>
+        </li>
+
+        <li>
+
+          <%= link_to '#', class: 'menu-dropdown' do %>
+              <%= fa_icon 'child', class: 'menu-icon' %>
+              <span class="menu-text"> Membros </span>
+          <% end %>
+
+          <ul class="submenu">
+
+            <li>
+
+              <%= link_to membros_path, class: 'open-menu' do %>
+                  <span class="menu-text"> Listar </span>
+              <% end %>
+
+            </li>
+
+            <li>
+              <%= link_to cargos_path, class: 'open-menu' do %>
+                  <span class="menu-text"> Cargos </span>
+              <% end %>
+            </li>
+
+            <li>
+
+              <%= link_to '#', class: 'menu-dropdown' do %>
+                  <span class="menu-text"> Contribuição </span>
+              <% end %>
+
+              <ul class="submenu">
+
+                <li>
+
+                  <%= link_to tipo_contribuicoes_path, class: 'open-menu' do %>
+                      <span class="menu-text"> Tipo Contribuição </span>
+                  <% end %>
+
+                </li>
+
+              </ul>
+
+            </li>
+
+          </ul>
+
+        </li>
+
+
+
+
+        <li>
+          <%= link_to redes_path, class: 'open-menu' do %>
+              <%= fa_icon 'code-fork', class: 'menu-icon' %>
+              <span class="menu-text"> Redes </span>
+          <% end %>
+        </li>
+
+        <li>
+          <%= link_to equipes_path, class: 'open-menu' do %>
+              <%= fa_icon 'users', class: 'menu-icon' %>
+              <span class="menu-text"> Equipes </span>
+          <% end %>
+        </li>
+
+        <li>
+          <%= link_to sub_equipes_path, class: 'open-menu' do %>
+              <%= fa_icon 'users', class: 'menu-icon' %>
+              <span class="menu-text"> Sub Equipes </span>
+          <% end %>
+        </li>
+
+        <li>
+          <%= link_to celulas_path, class: 'open-menu' do %>
+              <%= fa_icon 'dot-circle-o', class: 'menu-icon' %>
+              <span class="menu-text"> Celulas </span>
+          <% end %>
+        </li>
+
+      </ul>
+
+
+    </li>
+
+
+    <!--Relatorios-->
+    <li>
+
+    <li>
+
+      <%= link_to '#', class: 'menu-dropdown' do %>
+          <%= fa_icon 'file-pdf-o', class: 'menu-icon' %>
+          <span class="menu-text"> Relatórios </span>
+          <i class="menu-expand"></i>
+    <% end %>
+
+      <ul class="submenu">
+
+        <li>
+
+          <%= link_to contribuicao_anual_index_path, class: 'open-menu' do %>
+              <span class="menu-text"> Contribuição Anual </span>
+          <% end %>
+
+        </li>
+
+        <li>
+
+          <%= link_to ultima_contribuicao_index_path, class: 'open-menu' do %>
+              <span class="menu-text"> Última Contribuição </span>
+          <% end %>
+
+        </li>
+
+        <li>
+
+          <%= link_to "/membros_contribuicoes", class: 'open-menu' do %>
+              <span class="menu-text"> Membros contribuições </span>
+          <% end %>
+
+        </li>
+
+      </ul>
+
+    </li>
+
+    </li>
+
+
+
+    <!--Configuracao-->
+    <% if current_user.tem_permissao(['permissaoUsuario', 'permissaoGrupo']) %>
+        <li>
+          <%= link_to '#', class: 'menu-dropdown' do %>
+              <%= fa_icon 'cog', class: 'menu-icon' %>
+              <span class="menu-text"> Configuração </span>
+              <i class="menu-expand"></i>
+          <% end %>
+
+          <% if current_user.tem_permissao(['permissaoUsuario', 'permissaoGrupo']) %>
+              <ul class="submenu">
+                <li>
+                  <%= link_to '#', class: 'menu-dropdown' do %>
+                      <%= fa_icon 'user', class: 'menu-icon' %>
+                      <span class="menu-text"> Usuários </span>
+                      <i class="menu-expand"></i>
+                  <% end %>
+
+                  <ul class="submenu">
+
+                    <li>
+                      <%= link_to usuarios_path, class: 'open-menu' do %>
+                          <span class="menu-text"> Listar </span>
+                      <% end %>
+                    </li>
+
+                    <% if not current_user.permissao('permissaoGrupo').nenhuma? %>
+                        <li>
+                          <%= link_to '#', class: 'menu-dropdown' do %>
+                              <span class="menu-text"> Grupos de Usuário </span>
+                              <i class="menu-expand"></i>
+                          <% end %>
+
+                          <ul class="submenu">
+
+                            <li>
+                              <%= link_to grupos_path, class: 'open-menu' do %>
+                                  <%= fa_icon 'rocket', class: 'menu-icon' %>
+                                  <span class="menu-text"> Listar </span>
+                              <% end %>
+                            </li>
+                          </ul>
+                        </li>
+                    <% end %>
+                  </ul>
+
+                </li>
+              </ul>
+          <% end %>
+        </li>
+    <% end %>
+  </ul>
+  <!-- /Sidebar Menu -->
+</div>
+<!-- /Page Sidebar -->
